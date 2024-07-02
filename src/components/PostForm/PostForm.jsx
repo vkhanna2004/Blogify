@@ -92,7 +92,8 @@ export default function PostForm({ post }) {
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4"
+          readOnly
+          className="mb-4 cursor-not-allowed bg-gray-400"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
