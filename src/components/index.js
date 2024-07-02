@@ -12,6 +12,7 @@ import PostCard from "./PostCard";
 import Signup from "./Signup";
 import AuthLayout from "./AuthLayout";
 import Login from "./Login";
+import Loader from "./Loaders/Loader";
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   Signup,
   AuthLayout,
   Login,
+  Loader
 };

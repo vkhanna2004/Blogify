@@ -41,19 +41,12 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const session = await this.account.getSession('current').current;
-      if (session) {
-        const user = await this.account.get();
-        console.log("check");
-        return user;
-      } else {
-        console.log("User is not currently logged in.");
-        return null;
-      }
+        return await this.account.get();
     } catch (error) {
-      console.error("Appwrite service :: getCurrentUser :: error", error);
-  }
-  }
+        console.log("Appwrite service :: getCurrentUser :: error", error);
+    }
+    return null;
+}
   
 
   async logout() {

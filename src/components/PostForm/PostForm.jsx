@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, RTE, Select } from "../index";
+import { Button, Input, Loader, RTE, Select } from "../index";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ export default function PostForm({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
@@ -26,13 +26,13 @@ export default function PostForm({ post }) {
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
-        : undefined;
+        : null;
 
       if (file) {
         await appwriteService.deleteFile(post.featuredImage);
       }
 
-      const dbPost = await appwriteService.updatePost(post.slug, {
+      const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
@@ -48,7 +48,7 @@ export default function PostForm({ post }) {
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
-          userId: userData.$userId,
+          userId: userData.$id,
         });
 
         if (dbPost) {
@@ -56,7 +56,7 @@ export default function PostForm({ post }) {
         }
       }
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const slugTransform = useCallback((value) => {
@@ -92,8 +92,7 @@ export default function PostForm({ post }) {
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4 cursor-not-allowed bg-gray-200  "
-          readOnly
+          className="mb-4"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -117,7 +116,7 @@ export default function PostForm({ post }) {
           {...register("image", { required: !post })}
         />
         {post && (
-          <div className="w-full mb-4 dark:text-white">
+          <div className="w-full mb-4 ">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
@@ -133,10 +132,11 @@ export default function PostForm({ post }) {
         />
         <Button
           type="submit"
-          bgcolor={post ? "bg-green-500" : undefined}
+          bgColor={post ? "bg-green-500" : undefined}
           className="w-full"
+          disabled={loading}
         >
-          {post ? "Update" : "Submit"}
+          {loading ? <Loader /> : post ? "Update" : "Submit"}
         </Button>
       </div>
     </form>

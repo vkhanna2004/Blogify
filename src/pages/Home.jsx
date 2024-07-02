@@ -5,17 +5,15 @@ import { Container, PostCard } from "../components";
 
 function Home() {
   const authStatus = useSelector((state) => state.auth.status);
-  
   const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-      appwriteService.getPosts().then((posts) => {
-        if (posts) {
-          setPosts(posts.documents);
-        }
-      });
-    }, []);
-
+  useEffect(() => {
+    appwriteService.getPosts().then((posts) => {
+      if (posts) {
+        setPosts(posts.documents);
+      }
+    });
+  }, []);
 
   if (posts.length === 0) {
     return (
@@ -54,4 +52,3 @@ function Home() {
 }
 
 export default Home;
-
