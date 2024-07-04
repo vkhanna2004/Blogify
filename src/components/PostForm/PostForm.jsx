@@ -80,20 +80,20 @@ export default function PostForm({ post }) {
     return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
 
-  return (
+  return loading? <Loader className1="h-20 w-20 bg-zinc-800" className2="bg-zinc-800"/> : (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2 ">
+      <div className="w-2/3 px-2 rounded-xl border border-black/10 bg-zinc-900 md:my-4 text-gray-300">
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4"
+          className="mb-4 focus:bg-zinc-500/65 "
           {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
           readOnly
-          className="mb-4 cursor-not-allowed bg-gray-400"
+          className="mb-4 cursor-not-allowed  hover:bg-zinc-800"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -108,11 +108,11 @@ export default function PostForm({ post }) {
           defaultValue={getValues("content")}
         />
       </div>
-      <div className="w-1/3 px-2 ">
+      <div className="w-1/3 px-2 rounded-xl border border-black/10 bg-zinc-900 md:my-4 text-gray-300 ">
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4"
+          className="mb-4 focus:bg-zinc-500/65"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
@@ -128,13 +128,13 @@ export default function PostForm({ post }) {
         <Select
           options={["active", "inactive"]}
           label="Status"
-          className="mb-4"
+          className="mb-4 focus:bg-zinc-500/65"
           {...register("status", { required: true })}
         />
         <Button
           type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
+          bgColor={post ? "bg-green-500/80" : undefined}
+          className="w-full mt-14 rounded-md bg-green-500/80"
           disabled={loading}
         >
           {loading ? <Loader /> : post ? "Update" : "Submit"}

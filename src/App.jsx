@@ -3,15 +3,16 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 import authService from "./appwrite/auth"
 import {login, logout} from "./store/authSlice"
-import { Footer, Header } from './components'
+import { Footer, Header, Loader } from './components'
 import { Outlet } from 'react-router-dom'
-import Loader from './components/Loaders/Loader'
+
 
 function App() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    setLoading(true);
     authService.getCurrentUser()
     .then((userData) => {
       if (userData) {
@@ -20,11 +21,11 @@ function App() {
         dispatch(logout())
       }
     })
-    .finally(() => setLoading(false))
-  }, [])
+    setLoading(false)
+  })
   
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+    <div className='min-h-screen flex flex-wrap content-between bg-zinc-800'>
       <div className='w-full block'>
         <Header />
         <main>
@@ -33,7 +34,7 @@ function App() {
         <Footer />
       </div>
     </div>
-  ) : <Loader/>
+  ) : <Loader className1="h-20 w-20 bg-zinc-800" className2="bg-zinc-800"/>
 
   
 }
