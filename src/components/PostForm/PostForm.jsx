@@ -80,7 +80,7 @@ export default function PostForm({ post }) {
     return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
 
-  return loading? <Loader className1="h-20 w-20 bg-zinc-800" className2="bg-zinc-800"/> : (
+  return loading ? <Loader className1="h-20 w-20 bg-zinc-800" className2="bg-zinc-800" /> : (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2 rounded-xl border border-black/10 bg-zinc-900 md:my-4 text-gray-300">
         <Input
@@ -89,7 +89,7 @@ export default function PostForm({ post }) {
           className="mb-4 focus:bg-zinc-500/65 "
           {...register("title", { required: true })}
         />
-        <Input
+        {/* <Input
           label="Slug :"
           placeholder="Slug"
           readOnly
@@ -100,7 +100,7 @@ export default function PostForm({ post }) {
               shouldValidate: true,
             });
           }}
-        />
+        /> */}
         <RTE
           label="Content :"
           name="content"

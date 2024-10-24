@@ -15,7 +15,7 @@ function Home() {
       if (posts) {
         setPosts(posts.documents);
       }
-    },[]);
+    }, []);
 
     const fetchUserData = async () => {
       try {
@@ -41,7 +41,7 @@ function Home() {
                 <>
                   <h1 className="font-bold text-zinc-400 text-center text-6xl mb-4 ">
                     Welcome to
-                    <span className="text-teal-400">BLOGIFY!</span>
+                    <span className="text-blue-400">BLOGIFY!</span>
                   </h1>
                   <h3 className="text-zinc-400 text-center font-medium text-3xl mb-4">
                     {username}
@@ -50,7 +50,7 @@ function Home() {
               ) : (
                 <>
                   <h1 className="font-bold text-zinc-200 text-center text-6xl mb-32 ">
-                    Welcome to <span className="text-teal-400">BLOGIFY!</span>
+                    Welcome to <span className="text-blue-400">BLOGIFY!</span>
                   </h1>
                   <Link
                     to="/login"
@@ -79,7 +79,7 @@ function Home() {
     <div className="w-full py-8">
       <Container>
         <h1 className="font-bold text-zinc-200 text-center text-6xl mb-4 ">
-          Welcome to <span className="text-teal-400">BLOGIFY!</span>
+          Welcome to <span className="text-blue-500 hover:text-blue-400">BLOGIFY!</span>
         </h1>
         <h3 className="text-zinc-400 text-center font-medium text-3xl mb-10">
           {username}

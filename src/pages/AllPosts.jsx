@@ -31,7 +31,7 @@ function AllPosts() {
   }, []);
 
   return loading ? (
-    <Loader className1="h-20 w-20 bg-zinc-800" className2="bg-zinc-800"/>
+    <Loader className1="h-20 w-20 bg-zinc-800" className2="bg-zinc-800" />
   ) : !(posts.length === 0) ? (
     <div className="w-full py-8">
       <Container>
@@ -55,9 +55,9 @@ function AllPosts() {
             </h1>
             <Link
               to="/add-post"
-              className="text-teal-500 text-xl mb-4 font-medium text-primary transition-all duration-200 hover:underline "
+              className="text-blue-500 text-xl mb-4 font-medium text-primary transition-all duration-200 hover:underline "
             >
-              Ready to share? Click her to write your first post! 
+              Ready to share? Click her to write your first post!
             </Link>
           </div>
         </div>
